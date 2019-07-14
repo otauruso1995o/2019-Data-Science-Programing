@@ -17,8 +17,8 @@
 -In class（7/8）: Github ,READ.MD ，R,R Studio，R Markdown    
 -At home(7/9）:  Github ,READ.MD ，R,R Studio，R Markdown  
 **week 1-2**    
--In class(7/11):       
--At home（7/11）：
+-In class(7/11):dplr.資料整理（清洗），爬蟲       
+-At home（7/14）：dplr.資料整理（清洗），爬蟲
 
 **week2-1**    
 -In class（7/15）：    
