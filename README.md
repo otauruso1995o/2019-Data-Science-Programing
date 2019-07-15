@@ -18,7 +18,7 @@
 -At home(7/9）: [text](https://otauruso1995o.github.io/2019-Data-Science-Programing/week%201-1/TEXT.html)  
 **week 1-2**    
 -In class(7/11):dplr.資料整理（清洗），爬蟲       
--At home（7/14）：[book](https://github.com/otauruso1995o/2019-Data-Science-Programing/tree/master/week%201-2)
+-At home（7/14）：[book](https://otauruso1995o.github.io/2019-Data-Science-Programing/week%201-2/book.html)
 
 
 **week2-1**    
