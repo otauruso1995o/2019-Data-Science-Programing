@@ -15,7 +15,7 @@
 
 **week 1-1**    
 -In class（7/8）: Github ,READ.MD ，R,R Studio，R Markdown    
--At home(7/9）: [text] (https://otauruso1995o.github.io/2019-Data-Science-Programing/week1-1/TEXT.html)  
+-At home(7/9）: [text] (https://otauruso1995o.github.io/2019-Data-Science-Programing/week%201-2/TEXT.html)  
 **week 1-2**    
 -In class(7/11):dplr.資料整理（清洗），爬蟲       
 -At home（7/14）：dplr.資料整理（清洗），爬蟲
