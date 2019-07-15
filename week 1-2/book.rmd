@@ -1,10 +1,13 @@
 ---
-title: "goodreads book 網路書籍的評論率調查"
+title: "goodreads book 書籍的評論率調查"
 output: html_document
 ---
 
+資料來源：book1<https://www.kaggle.com/jealousleopard/goodreadsbooks?fbclid=IwAR1BBVND3nG6b5gvkmwgqQNgplf_9D1U33_Es-KEloFiwNJQI9WppOfEYLU>
+          book2<https://www.kaggle.com/brosen255/goodreads-books?fbclid=IwAR2zU-kP_TVk2yd0Srm-JiR1XEhuINpaqYn8Joqxj4YATFEwwML3RiYSUUw>
 
-
+研究目標：從  36610本書籍去分析這些書籍的最高評論率，以及評論率高的書籍往往有什麽特質。        
+匯入資料
 ```{r}
 library(dplyr)
 setwd("C:/Users/goodman/Desktop")
@@ -17,6 +20,8 @@ head(book2)
 
 ```
 
+
+備注：從book1的檔案中，先過濾出評分最高的書籍，然後在把列表（bookID,title,average_rating,text_reviews_count）select出來，然後在從網路評論率的列表中排序出高到低的順序，再選出前六筆的資料作分析：得出結論：評分越高的書籍，網路評論率越低。
 ```{r}
   book1$average_rating = as.numeric(as.character(book1$average_rating))
  View(book1)
@@ -28,15 +33,16 @@ head(book2)
   book1new
  View(book1new)
 ```
-book
+
+備注：從檔案book1，從其中挑選出列表（bookID,title,average_rating.text_reviews_count),再從text_reviews_count排列出其順序（從高到低），在挑選出網路評論率書籍最高的六本書。
 ```{r}
  book1new2<-select(book1,bookID,title,average_rating,text_reviews_count)
  book1new2<-arrange(book1new2,desc(text_reviews_count))
  book1new2<-head(book1new2)
  book1new2
 ```
-
  
+備注：從檔案book2,過濾出網路評分率最高的書籍，在選出列表（authorid，book_average_rating,title,num_reviews),在排列出其中的高低順序，在挑選出網路評論率最高的六本書籍。得出結論:評分越高的書籍，網路評論率也越低
 ```{r}
  book2new<-filter(book2,book_average_rating>=5)
  book2new<-select(book2new,author_id,book_average_rating,book_title,num_reviews)
@@ -44,7 +50,7 @@ book
  book2new<-head(book2new)
  book2new
 ```
- 
+備注：從檔案book2，從其列表中選出（author_id,book_average_rating,book_title,num_reviews),排列出其順序，在挑選出網路評論率最高的六筆資料。
 ```{r}
  book2new2<-select(book2,author_id,book_average_rating,book_title,num_reviews)
  book2new2<-arrange(book2new2,desc(num_reviews))
@@ -53,6 +59,5 @@ book
 ```
 
  
- 
- 
+
  
