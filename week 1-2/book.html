@@ -378,13 +378,194 @@ $(document).ready(function () {
 </div>
 
 
-<p>url &lt;- “<a href="https://www.kaggle.com/jealousleopard/goodreadsbooks?fbclid=IwAR2mtFKV04Woqn2eILuzIH92uCl2nNIOL3PJ2cttmlO_f4tn5u1kGyd5EYM" class="uri">https://www.kaggle.com/jealousleopard/goodreadsbooks?fbclid=IwAR2mtFKV04Woqn2eILuzIH92uCl2nNIOL3PJ2cttmlO_f4tn5u1kGyd5EYM</a>” filename &lt;- “book1.xlsx” head(book1)</p>
-<p>url &lt;- “<a href="https://www.kaggle.com/brosen255/goodreads-books" class="uri">https://www.kaggle.com/brosen255/goodreads-books</a>” filename &lt;- “book2.xlsx” head(book2)</p>
-<p>library(dplyr)</p>
-<p>book1new&lt;-filter(book1,average_rating&gt;=5) book1new&lt;-select(book1new,bookID,title,average_rating,text_reviews_count) book1new&lt;-arrange(book1new,desc(text_reviews_count)) book1new&lt;-head(book1new)</p>
-<p>book1new2&lt;-select(book1,bookID,title,average_rating,text_reviews_count) book1new2&lt;-arrange(book1new2,desc(text_reviews_count)) book1new2&lt;-head(book1new2)</p>
-<p>book2new&lt;-filter(book2,book_average_rating&gt;=5) book2new&lt;-select(book2new,author_id,book_average_rating,book_title,num_reviews) book2new&lt;-arrange(book2new,desc(num_reviews)) book2new&lt;-head(book2new)</p>
-<p>book2new2&lt;-select(book2,author_id,book_average_rating,book_title,num_reviews) book2new2&lt;-arrange(book2new2,desc(num_reviews)) book2new2&lt;-head(book2new2)</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>setwd(&quot;C:/Users/goodman/Desktop&quot;)
+
+book1&lt;-read.csv(&#39;book1.csv&#39;)
+head(book1)</code></pre>
+<pre><code>##   bookID                                                        title
+## 1      1    Harry Potter and the Half-Blood Prince (Harry Potter  #6)
+## 2      2 Harry Potter and the Order of the Phoenix (Harry Potter  #5)
+## 3      3     Harry Potter and the Sorcerer&#39;s Stone (Harry Potter  #1)
+## 4      4   Harry Potter and the Chamber of Secrets (Harry Potter  #2)
+## 5      5  Harry Potter and the Prisoner of Azkaban (Harry Potter  #3)
+## 6      8       Harry Potter Boxed Set  Books 1-5 (Harry Potter  #1-5)
+##                       authors average_rating       isbn        isbn13
+## 1 J.K. Rowling-Mary GrandPrÃ©           4.56 0439785960 9780439785969
+## 2 J.K. Rowling-Mary GrandPrÃ©           4.49 0439358078 9780439358071
+## 3 J.K. Rowling-Mary GrandPrÃ©           4.47 0439554934 9780439554930
+## 4                J.K. Rowling           4.41 0439554896 9780439554893
+## 5 J.K. Rowling-Mary GrandPrÃ©           4.55 043965548X 9780439655484
+## 6 J.K. Rowling-Mary GrandPrÃ©           4.78 0439682584 9780439682589
+##   language_code X..num_pages ratings_count text_reviews_count
+## 1           eng          652       1944099              26249
+## 2           eng          870       1996446              27613
+## 3           eng          320       5629932              70390
+## 4           eng          352          6267                272
+## 5           eng          435       2149872              33964
+## 6           eng         2690         38872                154</code></pre>
+<pre class="r"><code>book2&lt;-read.csv(&#39;book2.csv&#39;)
+head(book2)</code></pre>
+<pre><code>##   author_average_rating author_gender
+## 1                  4.01        female
+## 2                  4.15          male
+## 3                  4.00        female
+## 4                  3.88          male
+## 5                  4.10        female
+## 6                  3.77          male
+##                           author_genres author_id           author_name
+## 1                   historical-fiction,     74489   Victoria Thompson\n
+## 2 literature-fiction,mystery-thrillers,    706255       Stieg Larsson\n
+## 3                              romance,   5618190 Mimi Jean Pamfiloff\n
+## 4                       fiction,memoir,     37871        JosÃ© Donoso\n
+## 5                  young-adult,fantasy,     36122   Patricia C. Wrede\n
+## 6                               horror,     58947         Steve Niles\n
+##                            author_page_url author_rating_count
+## 1     /author/show/74489.Victoria_Thompson               74399
+## 2        /author/show/706255.Stieg_Larsson             3726435
+## 3 /author/show/5618190.Mimi_Jean_Pamfiloff               76496
+## 4            /author/show/37871.Jos_Donoso                5522
+## 5      /author/show/36122.Patricia_C_Wrede              291013
+## 6           /author/show/58947.Steve_Niles               47938
+##   author_review_count           birthplace book_average_rating
+## 1                6268  United States\n                    4.02
+## 2              142704         Sweden\n                    4.13
+## 3                7975    United States\n                  3.99
+## 4                 489          Chile\n                    4.14
+## 5               13453  United States\n                    4.01
+## 6                3240  United States\n                    3.80
+##                                                                  book_fullurl
+## 1        https://www.goodreads.com/book/show/686717.Murder_on_St_Mark_s_Place
+## 2 https://www.goodreads.com/book/show/2429135.The_Girl_with_the_Dragon_Tattoo
+## 3           https://www.goodreads.com/book/show/27833684-tailored-for-trouble
+## 4        https://www.goodreads.com/book/show/382975.The_Obscene_Bird_of_Night
+## 5                   https://www.goodreads.com/book/show/64207.Sorcery_Cecelia
+## 6           https://www.goodreads.com/book/show/831829.30_Days_of_Night_Vol_1
+##    book_id                                                  book_title
+## 1   686717                        \n      Murder on St. Mark&#39;s Place\n
+## 2  2429135                   \n      The Girl with the Dragon Tattoo\n
+## 3 27833684                              \n      Tailored for Trouble\n
+## 4   382975                         \n      The Obscene Bird of Night\n
+## 5    64207 \n      Sorcery &amp; Cecelia: or The Enchanted Chocolate Pot\n
+## 6   831829                          \n      30 Days of Night, Vol. 1\n
+##          genre_1         genre_2 num_ratings num_reviews pages
+## 1        Mystery      Historical        5260         375   277
+## 2        Fiction         Mystery     2229163       65227   465
+## 3        Romance    Contemporary        2151         391   354
+## 4        Fiction Magical Realism        1844         173   438
+## 5        Fantasy     Young Adult       17051        1890   326
+## 6 Sequential Art  Sequential Art       17122         561   104
+##        publish_date score
+## 1              2000  3230
+## 2       August 2005  3062
+## 3              2016  4585
+## 4              1970  1533
+## 5   April 15th 1988  2105
+## 6 January 10th 2004  4372</code></pre>
+<pre class="r"><code>  book1$average_rating = as.numeric(as.character(book1$average_rating))</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code> View(book1)
+ as.numeric(as.character(book1))</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA</code></pre>
+<pre class="r"><code> book1new&lt;-filter(book1,average_rating&gt;=5)
+  book1new&lt;-select(book1new,bookID,title,average_rating,text_reviews_count)
+  book1new&lt;-arrange(book1new,desc(text_reviews_count))
+  book1new&lt;-head(book1new)
+  book1new</code></pre>
+<pre><code>##   bookID
+## 1  17224
+## 2   2843
+## 3  23552
+## 4  32823
+## 5  36853
+## 6   2034
+##                                                                                                                                                                   title
+## 1                                                                                                                  The Diamond Color Meditation: Color Path to the Soul
+## 2 Literature Circle Guide: Bridge to Terabithia: Everything You Need For Successful Literature Circles That Get Kids Thinking  Talking  Writingâ\200”and Loving Literature
+## 3                                                                                                                                           The New Big Book of America
+## 4                                                                                                                          Fanning the Flame: Bible  Cross  and Mission
+## 5                                                                                                                                    Tyrannosaurus Wrecks (Stanley  #1)
+## 6                                                                                                                 Comoediae 1: Acharenses/Equites/Nubes/Vespae/Pax/Aves
+##   average_rating text_reviews_count
+## 1              5                  3
+## 2              5                  1
+## 3              5                  1
+## 4              5                  1
+## 5              5                  1
+## 6              5                  0</code></pre>
+<pre class="r"><code> View(book1new)</code></pre>
+<p>book</p>
+<pre class="r"><code> book1new2&lt;-select(book1,bookID,title,average_rating,text_reviews_count)
+ book1new2&lt;-arrange(book1new2,desc(text_reviews_count))
+ book1new2&lt;-head(book1new2)
+ book1new2</code></pre>
+<pre><code>##   bookID                                                    title
+## 1  41865                                  Twilight (Twilight  #1)
+## 2  19063                                           The Book Thief
+## 3      3 Harry Potter and the Sorcerer&#39;s Stone (Harry Potter  #1)
+## 4    865                                            The Alchemist
+## 5   3636                                                The Giver
+## 6  43641                                      Water for Elephants
+##   average_rating text_reviews_count
+## 1           3.59              93619
+## 2           4.37              84237
+## 3           4.47              70390
+## 4           3.85              54668
+## 5           4.12              54469
+## 6           4.08              52449</code></pre>
+<pre class="r"><code> book2new&lt;-filter(book2,book_average_rating&gt;=5)
+ book2new&lt;-select(book2new,author_id,book_average_rating,book_title,num_reviews)
+ book2new&lt;-arrange(book2new,desc(num_reviews))
+ book2new&lt;-head(book2new)
+ book2new</code></pre>
+<pre><code>##   author_id book_average_rating
+## 1  15683552                   5
+## 2  15683552                   5
+## 3   5347676                   5
+## 4   5347676                   5
+## 5   8079735                   5
+## 6  13654965                   5
+##                                                                                                                      book_title
+## 1 \n      Christian Warrior Women: A Guide to Taking Back Your Faith, Family &amp; Future (Christian Warrior Women Series Book 1)\n
+## 2 \n      Christian Warrior Women: A Guide to Taking Back Your Faith, Family &amp; Future (Christian Warrior Women Series Book 1)\n
+## 3                                                                                                          \n      Eyes on Me\n
+## 4                                                                                                          \n      Eyes on Me\n
+## 5                                                     \n      The Rhapsody of the Ant Woman: Poem with Complementary Drawings\n
+## 6                                                                                             \n      What We Think We Become\n
+##   num_reviews
+## 1           3
+## 2           3
+## 3           2
+## 4           2
+## 5           2
+## 6           1</code></pre>
+<pre class="r"><code> book2new2&lt;-select(book2,author_id,book_average_rating,book_title,num_reviews)
+ book2new2&lt;-arrange(book2new2,desc(num_reviews))
+ book2new2&lt;-head(book2new2)
+ book2new2</code></pre>
+<pre><code>##   author_id book_average_rating                       book_title
+## 1   1406384                4.24 \n      The Fault in Our Stars\n
+## 2      2383                4.06              \n      Gone Girl\n
+## 3      2383                4.06              \n      Gone Girl\n
+## 4      2383                4.06              \n      Gone Girl\n
+## 5   1063732                3.90  \n      The Girl on the Train\n
+## 6   1063732                3.90  \n      The Girl on the Train\n
+##   num_reviews
+## 1      147696
+## 2      126473
+## 3      126452
+## 4      126444
+## 5      102739
+## 6      102728</code></pre>
 
 
 

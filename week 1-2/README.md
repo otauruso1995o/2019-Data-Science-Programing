@@ -1,39 +1,11 @@
-***2019 Data Science Programing***
-==============================================  
-  
-  **Self Introduction**
-  ----------------------------------------
-  
--course：107學年度夏季學院【資料科學程序設計】  
--Student：李志豪  
--University Department：美術系四甲  
--ID:AAR103191  
--Intro：大家好，我是志豪  
+***資料收集***
+==============================================
 
-**schdule**
-------------------------------------
+**主題：美國各個城市狗貓失蹤率的數據分析**  
+-研究目標：研究美國2019年與2018年狗貓的失蹤率是否隨著年份的增加而減少與其尋回的可能性呢，製作一個數據瞭解美國當地狗毛失蹤的現狀。  
 
-**week 1-1**    
--In class（7/8）: Github ,READ.MD ，R,R Studio，R Markdown    
--At home(7/9）:  Github ,READ.MD ，R,R Studio，R Markdown  
-**week 1-2**    
--In class(7/11):       
--At home（7/11）：
-
-**week2-1**    
--In class（7/15）：    
--At home（):  
-**week2-2**  
--In class(7/18):    
--At home():  
-
-**week3-1**  
--In class(7/22):  
--At home():  
-**week3-2**  
--In class(7/25):  
--At home():
-
+網址鏈接：<http://www.programmingr.com/examples/read-csv-web/?fbclid=IwAR1ctpP9eSkevct0mHKvC5h1SMqXhwid8x6hue0f0oW4b1dynED22K7mFWo
+>
 
 
 
