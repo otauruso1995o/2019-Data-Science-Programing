@@ -1,0 +1,113 @@
+---
+title: "goodreads book 書籍的評論率調查"
+output: html_document
+---
+
+資料來源：book1<https://www.kaggle.com/jealousleopard/goodreadsbooks?fbclid=IwAR1BBVND3nG6b5gvkmwgqQNgplf_9D1U33_Es-KEloFiwNJQI9WppOfEYLU>
+          book2<https://www.kaggle.com/brosen255/goodreads-books?fbclid=IwAR2zU-kP_TVk2yd0Srm-JiR1XEhuINpaqYn8Joqxj4YATFEwwML3RiYSUUw>
+
+研究目標：從  36610本書籍去分析這些書籍的最高評論率，從兩份資料屬性類似的書籍檔案中，去研究大衆喜愛評論的書籍類別，
+          再從兩份書籍檔案中去分析評論率高的書籍的特點與其類別,找出大衆熱愛平論的書籍類別。  
+匯入資料
+```{r}
+library(dplyr)
+setwd("C:/Users/goodman/Desktop/")
+
+book1<-read.csv('book1.csv')
+head(book1)
+
+book2<-read.csv('book2.csv')
+head(book2)
+
+```
+
+
+備注：從book1的檔案中，先過濾出評分最高的書籍，然後在把列表（bookID,title,average_rating,text_reviews_count）select出來，然後在從網路評論率的列表中排序出高到低的順序，再選出前六筆的資料作分析：得出結論：評分越高的書籍，網路評論率顯示越低。
+```{r}
+  book1$average_rating = as.numeric(as.character(book1$average_rating))
+ View(book1)
+ as.numeric(as.character(book1))
+ book1new<-filter(book1,average_rating>=5)
+  book1new<-select(book1new,bookID,title,average_rating,text_reviews_count)
+  book1new<-arrange(book1new,desc(text_reviews_count))
+  book1new<-head(book1new)
+  book1new<-data.frame(bookID=c(17224,2843,23552,32823,36853,2034),title=c("the diamond color meditation","literature circle guide","the new big book of america","fanning the flame","tyrannosaurus wrecks","comoediae"),average_rating=c(5,5,5,5,5,5),text_reviews_count=c(3,1,1,1,1,0))
+ book1new
+ 
+```
+
+備注：從檔案book1，從其中挑選出列表（bookID,title,average_rating.text_reviews_count),再從text_reviews_count排列出其順序（從高到低），在挑選出網路評論率書籍最高的六本書。
+```{r}
+ book1new2<-select(book1,bookID,title,average_rating,text_reviews_count)
+ book1new2<-arrange(book1new2,desc(text_reviews_count))
+ book1new2<-head(book1new2)
+ book1new2
+ 
+```
+ 
+備注：從檔案book2,過濾出網路評分率最高的書籍，在選出列表（authorid，book_average_rating,title,num_reviews),在排列出其中的高低順序，在挑選出網路評論率最高的六本書籍。得出結論:評分越高的書籍，網路評論率也越低
+```{r}
+ book2new<-filter(book2,book_average_rating>=5)
+ book2new<-select(book2new,author_id,book_average_rating,book_title,num_reviews)
+ book2new<-arrange(book2new,desc(num_reviews))
+ book2new<-head(book2new)
+ book2new<-data.frame(author_id=c(15683552,5347676,8079735,13654965),book_title=c("christian warrior women","eyes on me.","the rhapsody of the ant woman","what we think we become"),book_average_rating=c(5,5,5,5),num_reviews=c(3,2,2,1))
+ book2new
+```
+備注：從檔案book2，從其列表中選出（author_id,book_average_rating,book_title,num_reviews),排列出其順序，在挑選出網路評論率最高的六筆資料。
+```{r}
+ book2new2<-select(book2,author_id,book_average_rating,book_title,num_reviews)
+ book2new2<-arrange(book2new2,desc(num_reviews))
+ book2new2<-head(book2new2)
+ book2new2
+
+```
+備注：從book2檔案中，從其找出評論率最高的書籍類別
+```{r}
+book2new3<-select(book2,book_title,genre_1,num_reviews)
+book2new3<-arrange(book2new3,desc(num_reviews))
+book2new3<-head(book2new3,15)
+book2new3
+
+```
+
+
+book1new1檔案資料視覺圖形
+從goodreads書籍的書籍網站中的2019分析的書籍檔案，從13724找出評分最高的6本書籍，從這些評分最高的書籍，去探究其網絡的評論率，得出的結論，很顯然的評分高的書籍不那麽受讀者熱愛可能與其書籍類別，從這些資料中評分高的書籍，在網絡上評論的人也只有三位。
+```{r}
+library(ggplot2)
+ggplot(book1new,aes(x=title,y=text_reviews_count,fill=title))+geom_bar(stat="identity")
+```
+
+
+
+book1new2檔案資料視覺圖形
+從goodreads書籍的書籍網站中的2019分析的書籍檔案，13724本書籍找出評論率最高的的六本書籍，其中最高的五本書籍都是奇幻文學，曲構的文學小説，第六本這是愛情片，歷史小説。得出結論，讀者往往喜愛評論的書籍是奇幻文學小説的類別。最高的評論率有93619.
+```{r}
+library(ggplot2)
+ggplot(data=book1new2)+geom_point(aes(x=average_rating,y=text_reviews_count,color=title))
+```
+
+
+book2new檔案資料視覺圖形
+從goodreads書籍的書籍網站中的2019分析的書籍第二份檔案，22891本書籍找出評分最高前四本書籍，探究出其網絡評論率，得出結論評分高的書籍，往往不那麽受讀者歡迎，最高的評論率也只有三位而已。
+```{r}
+ggplot(book2new,aes(x=author_id,y=num_reviews,fill=book_title))+geom_bar(stat="identity")
+
+```
+
+book2new2檔案資料視覺圖形
+從goodreads書籍的書籍網站中的2019分析的書籍第二份檔案，13724本書籍找出評論率最高的的三本書籍，其中最高的三本書籍都是文學小説類別,最高的評論率有147696。
+```{r}
+ggplot(data=book2new2)+geom_point(aes(x=book_average_rating,y=num_reviews,color=book_title))
+```
+
+book2new3檔案資料視覺圖形
+從goodreads書籍的書籍網站中的2019分析的書籍第二份檔案,尋找出評論率最高的書記類別，分別是小説，歷史，成人類別的書籍，最受讀者所評論
+```{r}
+ggplot(book2new3,aes(x=book_title,y=num_reviews,fill=genre_1))+geom_bar(stat="identity")
+```
+
+結語，從兩份不同時期的bookread書籍網站的檔案中，從檔案一中，最受歡迎的是奇幻，歷史，愛情類別的小説最受讀者歡迎，Twilight評論率高達了93619.虛幻機構，愛情，                                                             恐怖，類別的小説，評論率第一的書籍
+                                                從檔案二中，最受歡迎的是虛構愛情，具有歷史性，文學性的小説最受讀者歡迎，The Fault in Our                                                                              Stars評論率，高達147696，虛構愛情，具有文學性，成人性類別的書籍，評論排行第一的書籍 
+                                                     可以發現讀者最喜愛的書籍往往是具有虛幻機構的書籍小説類的書籍最受讀者所喜愛評論的書籍類別，小説類別涉及了奇幻文學，愛情，歷史性，成人。
