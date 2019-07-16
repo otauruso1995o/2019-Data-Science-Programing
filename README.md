@@ -24,8 +24,8 @@
 
 
 **week2-1**    
--In class（7/15）：    
--At home（):  
+-In class（7/15）：圖形學習    
+-At home（7/16):  [book](https://otauruso1995o.github.io/2019-Data-Science-Programing/week%202-1/book.html)  
 **week2-2**  
 -In class(7/18):    
 -At home():  
