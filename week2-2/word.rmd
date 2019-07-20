@@ -62,3 +62,15 @@ ordered.colors=FALSE,use.r.layout=FALSE,
 fixed.asp=TRUE)
 ```
 
+```{r}
+mixseg = worker()
+jieba_tokenizer=function(d){
+  unlist(segment(d[[1]],mixseg))
+}
+seg = lapply(docs, jieba_tokenizer)
+freqFrame = as.data.frame(table(unlist(seg)))
+freqFrame = freqFrame[order(freqFrame$Freq,decreasing=TRUE), ]
+library(knitr)
+kable(head(freqFrame), format = "markdown")
+```
+
