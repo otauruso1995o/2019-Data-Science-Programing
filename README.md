@@ -30,6 +30,7 @@
 -In class(7/18):文字云制作   
 -At home():  [word](https://otauruso1995o.github.io/2019-Data-Science-Programing/week2-2/word.html)
 
+
 **week3-1**  
 -In class(7/22):  
 -At home():  
