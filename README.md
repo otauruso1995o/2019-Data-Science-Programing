@@ -27,8 +27,8 @@
 -In class（7/15）：圖形學習    
 -At home（7/16):  [book](https://otauruso1995o.github.io/2019-Data-Science-Programing/week%202-1/book.html)  
 **week2-2**  
--In class(7/18):    
--At home():  
+-In class(7/18):文字云制作   
+-At home():  [word](https://otauruso1995o.github.io/2019-Data-Science-Programing/week2-2/word.html)
 
 **week3-1**  
 -In class(7/22):  
