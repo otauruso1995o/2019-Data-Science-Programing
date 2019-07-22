@@ -20,9 +20,9 @@ library(rvest)
 
 從電腦讀檔， 移除可能有問題的符號
 ```{r}
+ library(readr)
 setwd("C:/Users/goodman/Desktop/")
-filenames <- list.files(getwd(), pattern="3599.txt")
-files <- lapply(filenames, readLines)
+files<-read_file("3599.txt")
 docs <- Corpus(VectorSource(files))
 toSpace <- content_transformer(function(x, pattern) {
 return (gsub(pattern, "", x))
