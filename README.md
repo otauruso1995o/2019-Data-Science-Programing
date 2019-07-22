@@ -31,6 +31,7 @@
 -At home(7/20):  [word](https://otauruso1995o.github.io/2019-Data-Science-Programing/week2-2/word.html)
 
 
+
 **week3-1**  
 -In class(7/22):  
 -At home():  
