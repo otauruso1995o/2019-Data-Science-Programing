@@ -34,10 +34,11 @@
 
 **week3-1**  
 -In class(7/22):分組報告 
--At home(): [school](https://otauruso1995o.github.io/2019-Data-Science-Programing/week2-2/word.html) 
+-At home(7/22): :分組報告
 **week3-2**  
--In class(7/25):  
--At home():
+-In class(7/25): [school](https://otauruso1995o.github.io/2019-Data-Science-Programing/week3-3/school.html)
+                [schoolword](https://otauruso1995o.github.io/2019-Data-Science-Programing/week3-3/schoolword.html) 
+-At home(7.25):[分組報告](https://docs.google.com/presentation/d/1LGNVcl_0vJtfzFRKuIEWigYcxBi16ZMfvflo1aOlElM/edit?fbclid=IwAR2UqaFPtPS0Su2EFAsk67jBjhyCvWChKAQIKtXrZwxFCVrjcAvS41gtHGU#slide=id.g5df6e93dd3_2_1262) 
 
 
 
