@@ -33,8 +33,8 @@
 
 
 **week3-1**  
--In class(7/22):  
--At home():  
+-In class(7/22):分組報告 
+-At home(): [school](https://otauruso1995o.github.io/2019-Data-Science-Programing/week2-2/word.html) 
 **week3-2**  
 -In class(7/25):  
 -At home():
