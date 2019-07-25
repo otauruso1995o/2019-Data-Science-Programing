@@ -1,0 +1,123 @@
+---
+title: "學生畢業后的平均薪資"
+output: html_document
+---
+
+資料來源：<https://l.facebook.com/l.php?u=https%3A%2F%2Fdrive.google.com%2Fopen%3Fid%3D1EEPNHHIVqMP6A47oL1a3sxrTReNoOF8T%26fbclid%3DIwAR3D8AFI7631Pk7Qz0cpMPN9r2kaMZiNaGarY_N6A28E3VVzok6aV8ZzCDg&h=AT3837W6hqfzxrt3bvYgALkgdRTWN-MRKRM1lBb6Hhu8qlHV8lS9Ud7xLT6PNSDIt729UjkoPwVQNWxBGpKt3iKX6KA8OSOejh-wjkWQXPNeFLrmMXRxvebiYFspAYDitnP0FA>
+
+研究目標：瞭解轉學生的原本學校與目標學校，與動機並且再去搜集其他資料例如：
+          1.原本學校與目標學校平均薪資
+          2.原本系統所與目標係所平均薪資
+          3.動機背後的事實性
+          進而鏈接目前台灣社會現象等 做出一份調查報告學類取AESG的平均
+ 
+匯入資料         
+```{r}
+library(dplyr)
+library(ggplot2)
+setwd("C:/Users/goodman/Desktop/")
+file<-read.csv('file.csv')
+
+```
+
+長條圖製作
+統計學生所在當前學校的個數，有多少位。
+製作步驟，先select出（currentschool），然後再用table做統計，然後再用data，frame製作出表格，在長條圖分析。
+```{r}
+currentschool<-select(file,current_school)
+table(currentschool)
+file4<-data.frame(current_school=c(1,2,3,4,5),total=c(119,277,607,784,170))
+file4
+filenew1<-ggplot(file4,aes(x=current_school,y=total,fill=current_school))+geom_bar(stat="identity")
+filenew1
+```
+圓餅圖製作
+統計學生所在當前學校的個數，有多少位？
+製作步驟：匯入圓餅圖程序碼
+```{r}
+bp <- ggplot(file4, aes(x="", y=total, fill=current_school))+
+  geom_bar(width = 1, stat = "identity")
+bp2 <- bp + coord_polar("y", start=0)
+bp2
+```
+長條圖製作
+計算出目標學校的個數有多少位？
+製作步驟：用count統計出targetschool的數量，然後在長條形圖形製作。
+```{r}
+targetschool<-count(file, target_school)
+targetschool1<-ggplot(targetschool,aes(x=target_school,y=n,fill=target_school))+geom_bar(stat="identity")
+targetschool1
+```
+
+
+圓餅圖製作
+計算出目標學校的個數有多少位？
+製作步驟：圓餅圖程式碼輸入
+```{r}
+bp0 <- ggplot(targetschool, aes(x="", y=n, fill=target_school))+
+  geom_bar(width = 1, stat = "identity")
+bp01 <- bp0 + coord_polar("y", start=0)
+bp01
+
+
+```
+長條圖製作
+長條圖製作
+計算出轉學前科系的個數有多少位？
+製作步驟：用count統計出current_department的數量，然後在長條形圖形製作。
+```{r}
+currentdepartment<-count(file,current_department)
+currentdepartment1<-ggplot(currentdepartment,aes(x=current_department,y=n,fill=current_department))+geom_bar(stat="identity")
+currentdepartment1
+```
+
+圓餅圖製作
+計算出轉學前科系的個數有多少位？
+製作步驟：圓餅圖程式碼輸入
+```{r}
+currentdepartment2<- ggplot(currentdepartment, aes(x="", y=n, fill=current_department))+
+    geom_bar(width = 1, stat = "identity")
+ currentdepartment3 <- currentdepartment2 + coord_polar("y", start=0)
+currentdepartment3
+```
+
+長條圖製作
+計算出目標科系的個數有多少位？
+製作步驟：用count統計出target_department的數量，然後在長條形圖形製作。
+```{r}
+targetdepartment<-count(file,target_department)
+targetdepartment1<-ggplot(targetdepartment,aes(x=target_department,y=n,fill=target_department))+geom_bar(stat="identity")
+targetdepartment1
+
+```
+
+圓餅圖製作
+計算目標科系的個數有多少位？
+製作步驟：圓餅圖程式碼輸入
+```{r}
+targetdepartment2<- ggplot(targetdepartment, aes(x="", y=n, fill=target_department))+
+    geom_bar(width = 1, stat = "identity")
+targetdepartment3 <- targetdepartment2 + coord_polar("y", start=0)
+targetdepartment3
+```
+
+長條圖製作
+計算出轉校原因的個數有多少位？
+製作步驟：用count統計出reasons_for_transfering的數量，然後在長條形圖形製作。
+```{r}
+reasonsfortransfering<-count(file,reasons_for_transfering)
+reasonsfortransfering<-data.frame(reasonsfortransfering=c(1,2,3,4,5,6,7,8,9),total=c(577,818,1373,167,194,490,605,102,58))
+reasonsfortransfering1<-ggplot(reasonsfortransfering,aes(x=reasonsfortransfering,y=total,fill=reasonsfortransfering))+geom_bar(stat="identity")
+reasonsfortransfering1
+```
+
+圓餅圖製作
+計算轉校原因有多少位？
+製作步驟：圓餅圖程式碼輸入
+```{r}
+reasonfortransfering2<- ggplot(reasonsfortransfering, aes(x="", y=total, fill=reasonsfortransfering))+
+    geom_bar(width = 1, stat = "identity")
+reasonsfortransfering3 <- reasonfortransfering2 + coord_polar("y", start=0)
+reasonsfortransfering3
+```
+

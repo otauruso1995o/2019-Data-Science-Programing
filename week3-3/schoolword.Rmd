@@ -1,0 +1,89 @@
+title: "文字云制作,轉學意見分析"
+output:
+研究目標：内容敘述的主要内容
+下载包  
+```{r}
+library(NLP)
+library(tm)
+library(jiebaRD)
+library(jiebaR)
+library(RColorBrewer)
+library(wordcloud)
+library(rvest)
+```
+從電腦讀檔， 移除可能有問題的符號
+```{r}
+ library(readr)
+setwd("C:/Users/goodman/Desktop/")
+files<-read_file("textdata.txt")
+docs <- Corpus(VectorSource(files))
+toSpace <- content_transformer(function(x, pattern) {
+return (gsub(pattern, "", x))
+}
+
+)
+```
+移除標點符號，移除數字跟空白
+```{r}
+docs <- tm_map(docs, toSpace, "的")
+docs <- tm_map(docs, toSpace, "是")
+docs <- tm_map(docs, toSpace, "我")
+docs <- tm_map(docs, toSpace, "自")
+docs <- tm_map(docs, toSpace, "己")
+docs <- tm_map(docs, toSpace, "我")
+docs <- tm_map(docs, toSpace, "不")
+docs <- tm_map(docs, toSpace, "都")
+docs <- tm_map(docs, toSpace, "也")
+docs <- tm_map(docs, toSpace, "了")
+docs <- tm_map(docs, toSpace, "很")
+docs <- tm_map(docs, toSpace, "有")
+docs <- tm_map(docs, toSpace, "但")
+docs <- tm_map(docs, toSpace, "覺得")
+docs <- tm_map(docs, toSpace, "後")
+docs <- tm_map(docs, toSpace, "跟")
+docs <- tm_map(docs, toSpace, "雖然")
+docs <- tm_map(docs, toSpace, "會")
+docs <- tm_map(docs, toSpace, "就")
+docs <- tm_map(docs, toSpace, "多")
+docs <- tm_map(docs, toSpace, "在")
+docs <- tm_map(docs, removePunctuation)
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, stripWhitespace)
+```
+確保任何形式的單字只會轉換成相同詞性出現一次
+```{r}
+docs <- tm_map(docs, stemDocument)
+```
+斷詞
+```{r}
+mixseg = worker()
+jieba_tokenizer=function(d){
+unlist(segment(d[[1]],mixseg))
+}
+
+seg = lapply(docs, jieba_tokenizer)
+freqFrame = as.data.frame(table(unlist(seg)))
+```
+文字云图形制作
+```{r}
+par(family=("Heiti TC Light"))
+wordcloud(freqFrame$Var1,freqFrame$Freq,
+scale=c(5,0.1),min.freq=15,max.words=1000,
+random.order=TRUE, random.color=FALSE,
+rot.per=.1, colors=brewer.pal(8, "Dark2"),
+ordered.colors=FALSE,use.r.layout=FALSE,
+fixed.asp=TRUE)
+```
+文字分析
+```{r}
+mixseg = worker()
+jieba_tokenizer=function(d){
+  unlist(segment(d[[1]],mixseg))
+}
+seg = lapply(docs, jieba_tokenizer)
+freqFrame = as.data.frame(table(unlist(seg)))
+freqFrame = freqFrame[order(freqFrame$Freq,decreasing=TRUE), ]
+library(knitr)
+kable(head(freqFrame), format = "markdown")
+```
+結論：同學覺得轉學值得，因爲可以得到更好的環境，和資源。
